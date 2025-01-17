@@ -6,7 +6,7 @@
   "scripts": {
     "test": "vitest",
     "bench": "vitest bench",
-    "type-check": "tsc --noEmit"
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",
