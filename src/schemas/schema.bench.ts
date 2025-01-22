@@ -19,12 +19,35 @@ const validUserData = {
   createdAt: new Date(),
 };
 
-describe('Schema Validation Benchmarks', () => {
-  bench('Zod Validation', () => {
-    userSchemaZod.parse(validUserData);
-  });
+const invalidUserData = {
+  id: "not-a-uuid",
+  email: "not-an-email",
+  profile: {
+    firstName: "J", // Too short
+    lastName: "D", // Too short
+    age: 200, // Too high
+    preferences: [
+      { key: "theme", value: {} } // Invalid value type
+    ]
+  },
+  metadata: {},
+  createdAt: "not-a-date",
+};
 
-  bench('Arktype Validation', () => {
-    userSchemaArktype(validUserData);
-  });
+describe('Schema Validation Benchmarks', () => {
+  bench('Zod Validation (Valid)', () => {
+    userSchemaZod["~standard"].validate(validUserData);
+  }, { iterations: 1_000});
+
+  bench('Arktype Validation (Valid)', () => {
+    userSchemaArktype["~standard"].validate(validUserData);
+  }, { iterations: 1_000});
+
+  bench('Zod Validation (Invalid)', () => {
+    userSchemaZod["~standard"].validate(invalidUserData);
+  }, { iterations: 1_000});
+
+  bench('Arktype Validation (Invalid)', () => {
+    userSchemaArktype["~standard"].validate(invalidUserData);
+  }, { iterations: 1_000});
 });

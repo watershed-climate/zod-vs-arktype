@@ -2,7 +2,6 @@
   "name": "zod-vs-arktype",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "vitest",
     "bench": "vitest bench",
@@ -14,6 +13,7 @@
   "description": "",
   "dependencies": {
     "@types/node": "^22.10.7",
+    "@vitest/runner": "^3.0.3",
     "arktype": "^2.0.0",
     "typescript": "^5.7.3",
     "vitest": "^3.0.2",
