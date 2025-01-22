@@ -1,5 +1,5 @@
 import { describe, bench } from "vitest";
-import { userSchemaZod, userSchemaArktype } from "../schemas/common";
+import { userSchemaArktype } from "../schemas/common";
 
 const validUserData = {
   id: "123e4567-e89b-12d3-a456-426614174000",
@@ -19,11 +19,7 @@ const validUserData = {
   createdAt: new Date(),
 };
 
-describe("Schema Validation Benchmarks", () => {
-  bench("Zod Validation", () => {
-    userSchemaZod.parse(validUserData);
-  });
-
+describe("Arktype Validation Benchmark", () => {
   bench("Arktype Validation", () => {
     userSchemaArktype(validUserData);
   });
