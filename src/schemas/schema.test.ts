@@ -1,5 +1,4 @@
 import { describe, it, expect } from 'vitest';
-import { type as arkType } from 'arktype';
 import { userSchemaZod, userSchemaArktype } from '../schemas/common';
 
 describe('Schema Validation Tests', () => {
@@ -19,15 +18,14 @@ describe('Schema Validation Tests', () => {
       createdAt: new Date(),
     };
 
-    it('should validate with Zod', () => {
-      const result = userSchemaZod.safeParse(validData);
-      expect(result.success).toBe(true);
+    it('should validate with Zod', async () => {
+      const result = await userSchemaZod["~standard"].validate(validData);
+      expect(result.issues).toBeFalsy();
     });
 
-    it('should validate with Arktype', () => {
-      const result = userSchemaArktype(validData);
-      expect(result.profile).toBeDefined();
-      expect(result.problems).toBeUndefined();
+    it('should validate with Arktype', async () => {
+      const result = await userSchemaArktype["~standard"].validate(validData);
+      expect(result.issues).toBeFalsy();
     });
   });
 
@@ -47,14 +45,14 @@ describe('Schema Validation Tests', () => {
       createdAt: "not-a-date",
     };
 
-    it('should fail validation with Zod', () => {
-      const result = userSchemaZod.safeParse(invalidData);
-      expect(result.success).toBe(false);
+    it('should fail validation with Zod', async () => {
+      const result = await userSchemaZod["~standard"].validate(invalidData);
+      expect(result.issues).toBeTruthy();
     });
 
-    it('should fail validation with Arktype', () => {
-      const result = userSchemaArktype(invalidData);
-      expect(result).toBeInstanceOf(arkType.errors)
+    it('should fail validation with Arktype', async () => {
+      const result = await userSchemaArktype["~standard"].validate(invalidData);
+      expect(result.issues).toBeTruthy();
     });
   });
 });
