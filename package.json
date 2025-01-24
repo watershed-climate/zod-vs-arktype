@@ -14,7 +14,7 @@
   "dependencies": {
     "@types/node": "^22.10.7",
     "@vitest/runner": "^3.0.3",
-    "arktype": "^2.0.0",
+    "arktype": "^2.0.2",
     "typescript": "^5.7.3",
     "vitest": "^3.0.2",
     "zod": "^3.24.1"
