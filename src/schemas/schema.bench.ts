@@ -21,10 +21,14 @@ const validUserData = {
 
 describe("Schema Validation Benchmarks", () => {
   bench("Zod Validation", () => {
-    userSchemaZod.parse(validUserData);
+    for (let i = 0; i < 1000; i++) {
+      userSchemaZod.parse(validUserData);
+    }
   });
 
   bench("Arktype Validation", () => {
-    userSchemaArktype(validUserData);
+    for (let i = 0; i < 1000; i++) {
+      userSchemaArktype(validUserData);
+    }
   });
 });
