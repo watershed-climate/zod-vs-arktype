@@ -47,12 +47,12 @@ const preference = type({
 });
 
 export const userSchemaArktype = type({
-	id: "string",
-	email: "string",
+	id: "string.uuid",
+	email: "string.email",
 	profile: {
-		firstName: "string",
-		lastName: "string",
-		age: "number",
+		firstName: "string >= 2",
+		lastName: "string >= 2",
+		age: "0 <= number.integer <= 150",
 		preferences: preference.array(),
 	},
 	metadata: "Record<string,unknown>",
